@@ -1,11 +1,22 @@
 package net.test.selenium;
 
 import org.jruby.RubyProcess;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -24,7 +35,7 @@ You can assume the string has only uppercase and lowercase letters (a - z).
 */
 public class Test {
 
-        public static void main (String[] args) throws IOException, URISyntaxException, ParseException {
+        public static void main (String[] args) throws IOException, URISyntaxException, ParseException, XPathExpressionException, SAXException, ParserConfigurationException {
             System.out.println(compressString("abc"));
             System.out.println(compressString(""));
             System.out.println(compressString("123"));
@@ -39,6 +50,8 @@ public class Test {
             System.out.println(Arrays.toString(bubbleSort(new int[]{4,4,2,8,0,1,5,5,7,3})));
 
             System.out.println(readLog());
+
+            System.out.println(parseXml());
         }
 
         public static String compressString(String initialString) {
@@ -142,5 +155,15 @@ public class Test {
             return sb.toString();
         }
 
+        public static String parseXml() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, URISyntaxException {
+            InputSource source = new org.xml.sax.InputSource(new StringReader(Files
+                    .readString(Paths.get(Test.class.getResource("/log.xml").toURI()))));
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document document = db.parse(source);
+            XPathFactory xpathFactory = XPathFactory.newInstance();
+            XPath xpath = xpathFactory.newXPath();
+            return xpath.evaluate("//div//div", document);
+        }
 
 }
