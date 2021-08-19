@@ -1,4 +1,4 @@
-package net.test.selenium;
+package net.test.selenium.examples;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +14,12 @@ public class Test1 {
         System.out.println(checkContains3OrMoreSequentNumbers(new int[]{0, 22, 23, 24, 29}));
         System.out.println(checkContains3OrMoreSequentNumbers(new int[]{1, 2, 3, 4}));
         System.out.println(checkContains3OrMoreSequentNumbers(new int[]{1, 2, 4}));
+
+        System.out.println(checkContains3OrMoreSequentNumbers2(new int[]{2, 4, 5, 6, 2}));
+        System.out.println(checkContains3OrMoreSequentNumbers2(new int[]{0, 22, 23, 24, 29}));
+        System.out.println(checkContains3OrMoreSequentNumbers2(new int[]{1, 2, 3, 4}));
+        System.out.println(checkContains3OrMoreSequentNumbers2(new int[]{1, 2, 4}));
+        System.out.println(checkContains3OrMoreSequentNumbers2(new int[]{1, 2, 4, 6, 7}));
     }
 
     /**
@@ -51,19 +57,42 @@ public class Test1 {
     public static boolean checkContains3OrMoreSequentNumbers(int[] array) {
         boolean result = false;
         int counter = 0;
-        int lengthMinusOne = array.length - 1;
         for(int i = 0; i < array.length; i++) {
-            if((((lengthMinusOne != i) && (array[i] + 1) == array[i + 1]))) {
+            if(i > 0 && (array[i - 1] + 1) == array[i]) {
                 counter++;
-            } else if(counter >= 2) {
-                result = true;
-                break;
             } else {
                 counter = 0;
+            }
+            if(counter >= 2) {
+                result = true;
+                break;
             }
 
         }
 
+        return result;
+    }
+
+    public static boolean checkContains3OrMoreSequentNumbers2(int[] array) {
+        boolean result = false;
+        int counter = 0;
+        int iterator = 0;
+        int temp = 0;
+        for(int e : array) {
+            if(iterator > 0) {
+                if(temp + 1 == e) {
+                    counter++;
+                } else
+                    counter = 0;
+            }
+            if(counter >= 2) {
+                result = true;
+                break;
+            }
+            iterator++;
+            temp = e;
+
+        }
         return result;
     }
 

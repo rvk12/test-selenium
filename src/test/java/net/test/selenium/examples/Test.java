@@ -1,6 +1,5 @@
-package net.test.selenium;
+package net.test.selenium.examples;
 
-import org.jruby.RubyProcess;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -23,7 +22,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /*
 Implement a method to perform basic string compression using the counts of repeated characters.

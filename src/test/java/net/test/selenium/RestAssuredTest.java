@@ -39,8 +39,7 @@ public class RestAssuredTest {
         JSONArray ja = new JSONArray();
         ja.put("name");
         ja.put("noname");
-        // "val": ["name", "noname"],
-        person.put("val", ja);
+        person.put("val", ja); // "val": ["name", "noname"],
         RequestSpecification request = RestAssured.given();
 //                RestAssured.given().request().header().request().body()
 //                .when().post()
