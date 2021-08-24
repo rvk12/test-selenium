@@ -14,7 +14,8 @@ public class Test1 {
         System.out.println(checkContains3OrMoreSequentNumbers(new int[]{0, 22, 23, 24, 29}));
         System.out.println(checkContains3OrMoreSequentNumbers(new int[]{1, 2, 3, 4}));
         System.out.println(checkContains3OrMoreSequentNumbers(new int[]{1, 2, 4}));
-
+        System.out.println(checkContains3OrMoreSequentNumbers(new int[]{1, 2, 4, 5, 6}));
+        System.out.println("=============");
         System.out.println(checkContains3OrMoreSequentNumbers2(new int[]{2, 4, 5, 6, 2}));
         System.out.println(checkContains3OrMoreSequentNumbers2(new int[]{0, 22, 23, 24, 29}));
         System.out.println(checkContains3OrMoreSequentNumbers2(new int[]{1, 2, 3, 4}));
@@ -56,14 +57,14 @@ public class Test1 {
      * */
     public static boolean checkContains3OrMoreSequentNumbers(int[] array) {
         boolean result = false;
-        int counter = 0;
-        for(int i = 0; i < array.length; i++) {
-            if(i > 0 && (array[i - 1] + 1) == array[i]) {
+        int counter = 1;
+        for(int i = 1; i < array.length; i++) {
+            if((array[i - 1] + 1) == array[i]) {
                 counter++;
             } else {
-                counter = 0;
+                counter = 1;
             }
-            if(counter >= 2) {
+            if(counter >= 3) {
                 result = true;
                 break;
             }
@@ -75,7 +76,7 @@ public class Test1 {
 
     public static boolean checkContains3OrMoreSequentNumbers2(int[] array) {
         boolean result = false;
-        int counter = 0;
+        int counter = 1;
         int iterator = 0;
         int temp = 0;
         for(int e : array) {
@@ -83,9 +84,9 @@ public class Test1 {
                 if(temp + 1 == e) {
                     counter++;
                 } else
-                    counter = 0;
+                    counter = 1;
             }
-            if(counter >= 2) {
+            if(counter >= 3) {
                 result = true;
                 break;
             }
